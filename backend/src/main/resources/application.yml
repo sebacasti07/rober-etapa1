@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: delivery-service
+  threads:
+    virtual:
+      enabled: true
+delivery:
+  country: CL
+  currency: CLP
+  quote-timeout-ms: 2500
+  mock-enabled: true
+  simulate-no-riders: false
+  quote-ttl-seconds: 600
+  pickup:
+    name: Rober Motos
+    phone: +56912345678
+    address: Av. Bernardo O'Higgins 100, Quilicura, Santiago, Chile
+    latitude: -33.3650
+    longitude: -70.7290
+  uber:
+    enabled: false
+    base-url: https://sandbox-api.uber.com
+    auth-url: https://auth.uber.com/oauth/v2/token
+    client-id: ${UBER_CLIENT_ID:}
+    client-secret: ${UBER_CLIENT_SECRET:}
+    customer-id: ${UBER_CUSTOMER_ID:}
+transbank:
+  commerce-code: 597055555532
+  api-key: ${TRANSBANK_API_KEY:579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C}
+  return-url: http://localhost:8080/api/v1/payments/webpay/return
+frontend-url: http://localhost:5173

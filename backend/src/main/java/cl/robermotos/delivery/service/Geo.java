@@ -1,0 +1,2 @@
+package cl.robermotos.delivery.service;
+public final class Geo { private Geo(){} public static double haversine(double a,double b,double c,double d){ double r=6371,dl=Math.toRadians(c-a),dn=Math.toRadians(d-b); double x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(Math.toRadians(a))*Math.cos(Math.toRadians(c))*Math.sin(dn/2)*Math.sin(dn/2); return 2*r*Math.asin(Math.sqrt(x)); } public static long ceilTen(double n){return (long)(Math.ceil(n/10.0)*10);} }

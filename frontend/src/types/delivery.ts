@@ -1,0 +1,1 @@
+export type Quote={provider:string;displayName:string;priceClp:number;estimatedMinutes:number;distanceKm:number;quoteId:string};export type Place={name:string;address:string;lat:number;lng:number};
