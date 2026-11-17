@@ -8,6 +8,8 @@ import cl.robermotos.delivery.service.TrackingService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class DeliveryController {
+    private static final Logger log = LoggerFactory.getLogger(DeliveryController.class);
+
     private final DeliveryOrchestratorService orchestrator;
     private final TrackingService tracking;
 
@@ -29,7 +33,15 @@ public class DeliveryController {
 
     @PostMapping("/deliveries/quotes")
     public List<DeliveryQuoteDTO> quotes(@Valid @RequestBody DeliveryRequest request) {
-        return orchestrator.quotes(request);
+        log.info("Delivery quote request received: {}", request);
+        try {
+            List<DeliveryQuoteDTO> quotes = orchestrator.quotes(request);
+            log.info("Delivery quote count: {}", quotes.size());
+            return quotes;
+        } catch (RuntimeException exception) {
+            log.error("Failed to generate delivery quotes", exception);
+            throw exception;
+        }
     }
 
     @PostMapping("/deliveries/{orderId}/dispatch")
