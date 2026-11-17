@@ -31,6 +31,11 @@ public class DeliveryController {
         this.tracking = tracking;
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "OK";
+    }
+
     @PostMapping("/deliveries/quotes")
     public List<DeliveryQuoteDTO> quotes(@Valid @RequestBody DeliveryRequest request) {
         log.info("Delivery quote request received: {}", request);
