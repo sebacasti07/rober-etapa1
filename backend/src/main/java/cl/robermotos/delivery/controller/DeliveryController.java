@@ -8,7 +8,6 @@ import cl.robermotos.delivery.service.TrackingService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "http://localhost:5173")
 public class DeliveryController {
     private final DeliveryOrchestratorService orchestrator;
     private final TrackingService tracking;

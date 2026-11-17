@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 spring:
   application:
     name: delivery-service
@@ -29,5 +29,5 @@ delivery:
 transbank:
   commerce-code: 597055555532
   api-key: ${TRANSBANK_API_KEY:579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C}
-  return-url: http://localhost:8080/api/v1/payments/webpay/return
-frontend-url: http://localhost:5173
+  return-url: ${TRANSBANK_RETURN_URL:http://localhost:8080/api/v1/payments/webpay/return}
+frontend-url: ${FRONTEND_URL:http://localhost:5173}

@@ -1,23 +1,28 @@
 package cl.robermotos.payment;
 
 import java.util.Map;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/api/v1/payments/webpay")
-@CrossOrigin(origins = "http://localhost:5173")
 public class WebpayController {
     private final WebpayService service;
+    private final String frontendUrl;
 
-    public WebpayController(WebpayService service) {
+    public WebpayController(
+        WebpayService service,
+        @Value("${frontend-url}") String frontendUrl
+    ) {
         this.service = service;
+        this.frontendUrl = frontendUrl;
     }
 
     @PostMapping("/create")
@@ -37,13 +42,22 @@ public class WebpayController {
         @RequestParam(value = "TBK_TOKEN", required = false) String tbkToken
     ) {
         if (token == null) {
-            return new RedirectView("http://localhost:5173/?payment=cancelled");
+            return redirectToFrontend("cancelled", null);
         }
 
         Map<String, String> result = service.commit(token);
-        return new RedirectView(
-            "http://localhost:5173/?payment=" + result.get("status") + "&orderId=" + result.get("orderId")
-        );
+        return redirectToFrontend(result.get("status"), result.get("orderId"));
+    }
+
+    private RedirectView redirectToFrontend(String paymentStatus, String orderId) {
+        UriComponentsBuilder redirect = UriComponentsBuilder.fromUriString(frontendUrl)
+            .replacePath("/")
+            .replaceQuery(null)
+            .queryParam("payment", paymentStatus);
+        if (orderId != null) {
+            redirect.queryParam("orderId", orderId);
+        }
+        return new RedirectView(redirect.build().toUriString());
     }
 }
 

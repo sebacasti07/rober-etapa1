@@ -11,16 +11,23 @@ import cl.transbank.webpay.common.WebpayOptions;
 import cl.transbank.webpay.webpayplus.WebpayPlus;
 import java.util.Map;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WebpayService {
     private final DeliveryOrchestratorService delivery;
     private final OrderStore orders;
+    private final String returnUrl;
 
-    public WebpayService(DeliveryOrchestratorService delivery, OrderStore orders, DeliveryProperties properties) {
+    public WebpayService(
+        DeliveryOrchestratorService delivery,
+        OrderStore orders,
+        @Value("${transbank.return-url}") String returnUrl
+    ) {
         this.delivery = delivery;
         this.orders = orders;
+        this.returnUrl = returnUrl;
     }
 
     private WebpayPlus.Transaction transaction() {
@@ -46,7 +53,7 @@ public class WebpayService {
                 orderId,
                 UUID.randomUUID().toString(),
                 amount,
-                "http://localhost:8080/api/v1/payments/webpay/return"
+                returnUrl
             );
             orders.token(response.getToken(), orderId);
 
