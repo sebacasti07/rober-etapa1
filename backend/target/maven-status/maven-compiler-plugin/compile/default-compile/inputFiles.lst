@@ -6,6 +6,7 @@ C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robe
 C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robermotos\delivery\adapter\RappiCargoAdapter.java
 C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robermotos\delivery\adapter\UberDirectAdapter.java
 C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robermotos\delivery\controller\DeliveryController.java
+C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robermotos\delivery\controller\DeliveryExceptionLoggingAdvice.java
 C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robermotos\delivery\controller\WebhookController.java
 C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robermotos\delivery\dto\DeliveryQuoteDTO.java
 C:\Users\Larry\OneDrive\Desktop\delivery-ecommerce\backend\src\main\java\cl\robermotos\delivery\dto\DeliveryRequest.java

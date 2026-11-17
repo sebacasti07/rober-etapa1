@@ -36,6 +36,19 @@ public class DeliveryController {
         return "OK";
     }
 
+    @GetMapping("/debug-quotes")
+    public List<DeliveryQuoteDTO> debugQuotes() {
+        DeliveryRequest request = new DeliveryRequest(
+            -33.3650,
+            -70.7290,
+            "Av. Bernardo O'Higgins 100, Quilicura, Santiago, Chile",
+            -33.4489,
+            -70.6693,
+            "Plaza de Armas, Santiago, Chile"
+        );
+        return orchestrator.quotes(request);
+    }
+
     @PostMapping("/deliveries/quotes")
     public List<DeliveryQuoteDTO> quotes(@Valid @RequestBody DeliveryRequest request) {
         log.info("Delivery quote request received: {}", request);
