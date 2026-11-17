@@ -55,6 +55,7 @@ public class DeliveryController {
         try {
             List<DeliveryQuoteDTO> quotes = orchestrator.quotes(request);
             log.info("Delivery quote count: {}", quotes.size());
+            log.info("Delivery quote result list: {}", quotes);
             return quotes;
         } catch (RuntimeException exception) {
             log.error("Failed to generate delivery quotes", exception);
